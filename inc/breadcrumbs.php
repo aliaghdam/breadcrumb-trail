@@ -1124,8 +1124,18 @@ class Breadcrumb_Trail {
 			// Get the parent term.
 			$term = get_term( $term_id, $taxonomy );
 
+			if ( ! $term || is_wp_error( $term ) ) {
+				continue;
+			}
+
+			$link = get_term_link( $term, $taxonomy );
+
+			if ( ! $link || is_wp_error( $link ) ) {
+				continue;
+			}
+
 			// Add the formatted term link to the array of parent terms.
-			$parents[] = sprintf( '<a href="%s">%s</a>', esc_url( get_term_link( $term, $taxonomy ) ), $term->name );
+			$parents[] = sprintf( '<a href="%s">%s</a>', esc_url( $link ), $term->name );
 
 			// Set the parent term's parent as the parent ID.
 			$term_id = $term->parent;
