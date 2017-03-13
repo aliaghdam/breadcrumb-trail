@@ -1125,13 +1125,13 @@ class Breadcrumb_Trail {
 			$term = get_term( $term_id, $taxonomy );
 
 			if ( ! $term || is_wp_error( $term ) ) {
-				continue;
+				break;
 			}
 
 			$link = get_term_link( $term, $taxonomy );
 
 			if ( ! $link || is_wp_error( $link ) ) {
-				continue;
+				break;
 			}
 
 			// Add the formatted term link to the array of parent terms.
